@@ -4,3 +4,4 @@
 _bookdown_files/**
 **/book_temp.Rmd
 cleaning_dca_weather.R
+.Rproj.user/
