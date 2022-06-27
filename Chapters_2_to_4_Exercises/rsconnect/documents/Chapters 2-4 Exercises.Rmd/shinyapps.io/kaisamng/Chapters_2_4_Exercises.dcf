@@ -1,0 +1,14 @@
+name: Chapters_2_4_Exercises
+title: Chapters_2_4_Exercises
+username:
+account: kaisamng
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 6554328
+bundleId: 6046734
+url: https://kaisamng.shinyapps.io/Chapters_2_4_Exercises/
+when: 1656336011.20292
+lastSyncTime: 1656336011.20292
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: periodic_table.RData

@@ -1,0 +1,178 @@
+---
+output: 
+  html_document:
+    includes:
+      in_header: iframe_resizer.html
+runtime: shiny_prerendered
+---
+
+## Exercise 1
+
+```{r setup, include=FALSE}
+library(learnr)
+library(readr)
+library(kableExtra)
+library(gradethis)
+knitr::opts_chunk$set(echo = FALSE)
+gradethis::gradethis_setup()
+```
+
+```{r ex-data, include=FALSE, eval= TRUE}
+load("ch2_4_data.RData")
+```
+Recreate the following dataframe, and store it under the name `tiktokers`.
+
+```{r tiktokers kable, echo=FALSE, fig.cap="Table for Chapter 4 Exercise"}
+load("ch2_4_data.RData")
+knitr::kable(tiktokers, caption="Table for Chapter 4 Exercise", booktabs=FALSE) %>%
+  kable_styling(position= "center")
+```
+
+```{r exercise-1, exercise=TRUE, exercise.cap="Exercise 1"}
+# Recreate the following Dataframe here:
+
+
+
+
+```
+
+```{r exercise-1-hint}
+best_cats <- data.frame(
+  variable_1= c(),
+  variable_2= c(),
+  variable_3= c()
+)
+```
+
+```{r exercise-1-solution}
+tiktokers<- data.frame(
+  user= c("khaby.lame", "charlidamelio", "bellapoarch", "addisonre", "willsmith", "zachking", "kimberly.loaiza", "tiktok", "cznburak", "dixiedamelio"),
+  rank= c(1:10),
+  brand= c(rep(FALSE, 7), TRUE, rep(FALSE, 2)),
+  followers_mill= c(142.9, 142.3, 90.1, 87.9, 72, 68.7, 63.6, 62.9, 59, 57.4),
+  likes_mill= c(2286.9, 10960.3, 2096.8, 5682.3, 437.3, 866.9, 3723.9, 268.8, 1057.7, 3202.8)
+)
+
+```
+
+```{r exercise-1-code-check}
+grade_code()
+```
+
+## Exercise 2
+
+1. Write code that selects every other tiktoker (1st, 3rd, 5th...)
+
+2. Write code that selects only the tiktoker that is a brand account.
+
+3. Write code that selects any tiktoker that is *not* a brand, and only their `likes_mill` and `followers_mill` column.
+
+4. Write code that selects all tiktokers that have more than 1 billion likes. (In this case, since the `likes` column is in terms of millions, you want to select all tiktokers that are greater than 1000.)
+
+```{r exercise-2, exercise=TRUE, exercise.setup="ex-data", exercise.cap="Exercise 2"}
+#This prints out the number of likes that each tiktoker has, in millions.
+tiktokers$likes_mill
+
+#Write the solution for #1 here.
+
+
+#Write the solution for #2 here.
+
+
+#Write the solution for #3 here.
+
+
+#Write the solution for #4 here.
+
+
+
+```
+
+```{r exercise-2-hint}
+#This prints out the number of likes that each tiktoker has, in millions.
+tiktokers$likes_mill
+
+#Write the solution for #1 here.
+seq(from=1, to=20, by=3)
+
+#Write the solution for #2 here.
+
+
+#Write the solution for #3 here.
+
+
+#Write the solution for #4 here.
+
+
+
+```
+
+```{r exercise-2-solution}
+#This prints out the number of likes that each tiktoker has, in millions.
+tiktokers$likes_mill
+
+#Write the solution for #1 here.
+tiktokers[seq(from=1, to=10, by=2), ]
+
+#Write the solution for #2 here.
+tiktokers[tiktokers$brand %in% TRUE,]
+
+#Write the solution for #3 here.
+tiktokers[tiktokers$brand %in% FALSE, c("likes_mill", "followers_mill")]
+
+#Write the solution for #4 here.
+tiktokers[tiktokers$likes_mill> 1000, ]
+
+```
+
+```{r exercise-2-code-check}
+grade_code()
+```
+
+## Exercise 3
+
+Now, you will use the periodic_table data. It has already been loaded for you.
+
+```{r}
+head(periodic_table)
+```
+
+1. Select the row whose element `name` is "Beryllium." 
+
+2. Select all rows whose element has a `group` of `1`, and whose `state_at_stp` is `Solid`. Use the `%in%` and `&` operator.
+
+3. Select all rows whose element has a `description` of `Halogen`, or whose `group` is greater than `17`. Return only the `atomic_number`, `symbol`, `name`, and `state_at_stp` columns.  Given that this single call will return some `NA`s, insert your entire command into the `na.omit()` function. 
+
+```{r exercise-3, exercise=TRUE, exercise.setup="ex-data", exercise.cap="Exercise 3"}
+#1
+
+#2
+
+#3
+
+```
+
+```{r exercise-3-hint}
+#1
+periodic_table[... %in% "Beryllium", ]
+#2
+periodic_table[... & ... , ]
+#3
+na.omit(periodic_table[... | ...], c(...))
+```
+
+
+```{r exercise-3-solution}
+#1
+periodic_table[periodic_table$name %in% "Beryllium", ]
+#2
+periodic_table[periodic_table$group %in% 1 & periodic_table$state_at_stp %in% "Solid", ]
+#3
+na.omit(periodic_table[periodic_table$description %in% "Halogen" | periodic_table$group > 17, c("atomic_number", "symbol", "name", "state_at_stp")])
+```
+
+```{r exercise-3-code-check}
+grade_code()
+```
+
+<div data-iframe-height></div>
