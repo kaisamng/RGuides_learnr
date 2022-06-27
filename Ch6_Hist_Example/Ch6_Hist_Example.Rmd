@@ -1,0 +1,35 @@
+---
+output: 
+  html_document:
+    includes:
+      in_header: iframe_resizer.html
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(readr)
+library(kableExtra)
+library(gradethis)
+knitr::opts_chunk$set(echo = FALSE)
+gradethis::gradethis_setup()
+```
+
+
+```{r hist-ex, exercise=TRUE, exercise.cap="Histogram Example"}
+march_temps<- dca_weather$TAVG[dca_weather$month %in% 3]
+
+hist(march_temps)
+
+```
+
+```{r hist-ex-hint}
+hist(march_temps,
+     col="______", 
+     main="______")
+```
+
+```{r hist-ex-setup}
+urlfile<- 'https://github.com/kaisamng/RGuides/blob/main/resources/data/dca_weather.csv?raw=true'
+dca_weather <- read_csv(url(urlfile))
+```
