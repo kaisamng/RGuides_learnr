@@ -1,0 +1,40 @@
+---
+output: 
+  html_document:
+    includes:
+      in_header: iframe_resizer.html
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(readr)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+```{r par-ex, exercise=TRUE, exercise.cap="Boxplot Exercise"}
+june_temps<- dca_weather$TAVG[dca_weather$month %in% 6]
+
+par(mfrow=c(2,1))
+
+hist(june_temps, 
+     col= "skyblue", 
+     main= "Average Daily Temperature at DCA in June 2022", 
+     xlab= "Temperature (Fahrenheit)", 
+     ylab="Number of Days")
+
+boxplot(june_temps, 
+     col= "green", 
+     main= "Average Daily Temperature at DCA in June 2022", 
+     xlab= "Temperature (Fahrenheit)", 
+     ylab="Number of Days",
+     horizontal=T)
+
+```
+
+
+```{r par-ex-setup}
+urlfile<- 'https://github.com/kaisamng/RGuides/blob/main/resources/data/dca_weather.csv?raw=true'
+dca_weather <- read_csv(url(urlfile))
+```

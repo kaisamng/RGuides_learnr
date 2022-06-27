@@ -1,0 +1,42 @@
+---
+output: 
+  html_document:
+    includes:
+      in_header: iframe_resizer.html
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(readr)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+```{r boxplot-ex, exercise=TRUE, exercise.cap="Boxplot Exercise"}
+boxplot(month~PRCP, data=dca_weather)
+
+```
+
+```{r boxplot-ex-hint}
+boxplot(y~x, data=dca_weather,
+        col=c(),
+        main="",
+        xlab= "",
+        ylab="",
+        names=c())
+```
+
+```{r boxplot-ex-solution}
+boxplot(PRCP~month, data=dca_weather,
+        col=c("skyblue", "darkcyan", "cadetblue1", "chartreuse", "forestgreen", "darkorange"),
+        main= "Daily Precipitation at DCA Airport, by Month",
+        xlab= "Month",
+        ylab="Precipitation (Inches)",
+        names=c("Jan", "Feb", "Mar", "Apr", "May", "Jun"))
+```
+
+```{r boxplot-ex-setup}
+urlfile<- 'https://github.com/kaisamng/RGuides/blob/main/resources/data/dca_weather.csv?raw=true'
+dca_weather <- read_csv(url(urlfile))
+```

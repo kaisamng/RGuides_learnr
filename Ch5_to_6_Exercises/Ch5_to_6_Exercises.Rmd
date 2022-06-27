@@ -1,0 +1,189 @@
+---
+output: 
+  html_document:
+    includes:
+      in_header: iframe_resizer.html
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(readr)
+library(gradethis)
+gradethis::gradethis_setup()
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Chicken Weights
+
+We will do our first analysis with the `ChickWeight` dataset, already built into R. 
+
+```{r, include=TRUE, echo=TRUE}
+data(ChickWeight)
+head(ChickWeight)
+```
+
+To understand what the data represents, type `?ChickWeight` into the console **in RStudio**. If you are lazy, you can also find the documentation [here.](https://rdocumentation.org/packages/datasets/versions/3.6.2/topics/ChickWeight)  
+
+How many chickens in total were part of this experiment? (Hint: look at the number of rows)
+
+
+
+### Summary Exercises
+1. Find the average weight of a chicken on any diet on the 18th day of their feeding.
+
+2. Tabulate the total number of chickens that were on each diet.
+
+3. Find the standard deviation of chicken weights on Day 0. Then, do the same for Day 21.
+
+4. Finally, use `dplyr` to find the mean weight and standard deviation of all Chickens on Day 21, grouped by diet. Which diet led to the heaviest chickens? (When you do the summarize function, use `mean_weight` and `std_dev` as your labels).
+
+```{r summ-chicken-setup}
+library(datasets)
+library(dplyr)
+data(ChickWeight)
+```
+
+```{r summ-chicken, exercise=TRUE, exercise.cap="Summarizing Chicken Weights Exercise"}
+#1
+
+#2
+
+#3
+
+#4
+
+```
+
+```{r summ-chicken-solution}
+#1
+mean(ChickWeight$weight[ChickWeight$Time %in% 18])
+
+#2
+table(ChickWeight$Diet)
+
+#3
+sd(ChickWeight$weight[ChickWeight$Time %in% 0])
+sd(ChickWeight$weight[ChickWeight$Time %in% 21])
+
+#4
+ChickWeight %>%
+  dplyr::filter(Time==21) %>%
+  dplyr::select(weight, Diet) %>%
+  dplyr::group_by(Diet)%>% 
+  summarize(mean_weight= mean(weight), std_dev= sd(weight))
+```
+
+```{r summ-chicken-hint}
+#1
+mean(ChickWeight$weight[... %in% ...])
+
+#2
+table(...)
+
+#3
+sd(...)
+sd(...)
+
+#4
+ChickWeight %>%
+  dplyr::filter(... ) %>%
+  dplyr::group_by(...)%>% 
+  dplyr::select(...) %>%
+  ...(mean_weight= mean(...), std_dev= sd(...))
+```
+
+```{r summ-chicken-code-check}
+grade_code()
+```
+
+
+
+### Visualization Exercises
+```{r viz-chicken-setup}
+library(datasets)
+library(dplyr)
+data(ChickWeight)
+```
+
+Let's move onto practicing making graphs now. 
+
+1. Filter the weight of chicken weights on Day `14` (remember that's the `Time` variable) that were on Diet `3`, and save that as `wt_day14_diet3`. Then graph this variable in a dot plot. Use the following for your parameters:
+  + Title: "Weights of Chickens on Diet 3, on Day 14"
+  + x-axis: "Weight (grams)"
+
+2. Create a histogram of chicken weights on Day `0` , for any diet. Use the following for your parameters:
+  + Title: "Chicken Weights on Day 0"
+  + x-axis: "Weight (grams)"
+  + y-axis: "Number of Chickens"
+
+3. Create boxplots of chicken weights on Day `21`, grouped by `Diet`. Use the following parameters:
+  + Title: "Comparison of Chicken Diets"
+  + x-axis: "Diet"
+  + y-axis: "Weight (grams)"
+  + You should also label each diet as "Diet 1", "Diet 2", and so forth.
+  + Colors: From left to right, your boxplots should be "pink", "green", "skyblue", and "purple" respectively.
+
+```{r viz-chicken, exercise=TRUE, exercise.cap="Vizualizing Chicken Weights Exercise"}
+#1
+
+#2
+
+#3
+```
+
+```{r viz-chicken-hint}
+#1
+wt_day14_diet3 <- ChickWeight$...[ChickWeight$Time %in% 14 & ...]
+stripchart(... , method = "stack", 
+           offset = .5, 
+           at = 0, 
+           pch = 19, 
+           main = "...", 
+           xlab = "...")
+
+#2
+hist(ChickWeight$weight[...],
+     main="Chicken Weights on Day 0",
+     xlab="Weight (grams)",
+     ylab= "Number of Chickens")
+
+#3
+boxplot(...~..., data=...,
+        main= "Comparison of Chicken Diets",
+        xlab= "Diet",
+        ylab= "Weight (grams)",
+        names= c(...),
+        ...= c(...))
+
+```
+
+```{r viz-chicken-solution}
+#1
+wt_day14_diet3 <- ChickWeight$weight[ChickWeight$Time %in% 14 & ChickWeight$Diet %in% 3]
+stripchart(wt_day14_diet3, method = "stack", 
+           offset = .5, 
+           at = 0, 
+           pch = 19, 
+           main = "Weights of Chickens on Diet 3, on Day 14", 
+           xlab = "Weight (grams)")
+
+#2
+hist(ChickWeight$weight[ChickWeight$Time %in% 0],
+     main="Chicken Weights on Day 0",
+     xlab="Weight (grams)",
+     ylab= "Number of Chickens")
+
+#3
+boxplot(weight~Diet, data=ChickWeight,
+        main= "Comparison of Chicken Diets",
+        xlab= "Diet",
+        ylab= "Weight (grams)",
+        names= c("Diet 1", "Diet 2", "Diet 3", "Diet 4"),
+        col= c("pink", "green", "skyblue", "purple"))
+
+```
+
+```{r viz-chicken-code-check}
+grade_code()
+```
