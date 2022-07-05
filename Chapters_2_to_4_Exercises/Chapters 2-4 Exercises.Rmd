@@ -13,6 +13,10 @@ library(kableExtra)
 library(gradethis)
 knitr::opts_chunk$set(echo = FALSE)
 gradethis::gradethis_setup()
+urlfile1<- 'https://gitcdn.link/cdn/kaisamng/RGuides/main/resources/data/periodic-table-data.csv'
+periodic_table <- read_csv(url(urlfile1))
+urlfile2<- 'https://gitcdn.link/cdn/kaisamng/RGuides/main/resources/data/dca_weather.csv'
+dca_weather <- read_csv(url(urlfile2))
 ```
 
 ## Warm Up
@@ -70,8 +74,13 @@ grade_code()
 Recreate the following dataframe, and store it under the name `tiktokers`.
 
 ```{r tiktokers kable, echo=FALSE, fig.cap="Table for Chapter 4 Exercise"}
-urlfile<- 'https://github.com/kaisamng/RGuides_learnr/blob/main/Chapters_2_to_4_Exercises/ch2_4_data.RData?raw=true'
-load(url(urlfile))
+tiktokers<- data.frame(
+  user= c("khaby.lame", "charlidamelio", "bellapoarch", "addisonre", "willsmith", "zachking", "kimberly.loaiza", "tiktok", "cznburak", "dixiedamelio"),
+  rank= c(1:10),
+  brand= c(rep(FALSE, 7), TRUE, rep(FALSE, 2)),
+  followers_mill= c(142.9, 142.3, 90.1, 87.9, 72, 68.7, 63.6, 62.9, 59, 57.4),
+  likes_mill= c(2286.9, 10960.3, 2096.8, 5682.3, 437.3, 866.9, 3723.9, 268.8, 1057.7, 3202.8)
+)
 knitr::kable(tiktokers, caption="Table for Chapter 4 Exercise", booktabs=FALSE) %>%
   kable_styling(position= "center")
 ```
@@ -141,20 +150,20 @@ tiktokers$likes_mill
 
 ```{r exercise-2-hint}
 #This prints out the number of likes that each tiktoker has, in millions.
+#This prints out the number of likes that each tiktoker has, in millions.
 tiktokers$likes_mill
 
 #Write the solution for #1 here.
-seq(from=1, to=20, by=3)
+tiktokers[seq(from=..., to=..., by=2), ]
 
 #Write the solution for #2 here.
-
+tiktokers[tiktokers$brand %in% ...,]
 
 #Write the solution for #3 here.
-
+tiktokers[tiktokers$brand %in% FALSE, c(..., ...)]
 
 #Write the solution for #4 here.
-
-
+tiktokers[tiktokers$...> ..., ]
 
 ```
 
@@ -181,15 +190,24 @@ grade_code()
 ```
 
 ``` {r exercise-2-setup}
-urlfile<- 'https://github.com/kaisamng/RGuides_learnr/blob/main/Chapters_2_to_4_Exercises/ch2_4_data.RData?raw=true'
-load(url(urlfile))
+tiktokers<- data.frame(
+  user= c("khaby.lame", "charlidamelio", "bellapoarch", "addisonre", "willsmith", "zachking", "kimberly.loaiza", "tiktok", "cznburak", "dixiedamelio"),
+  rank= c(1:10),
+  brand= c(rep(FALSE, 7), TRUE, rep(FALSE, 2)),
+  followers_mill= c(142.9, 142.3, 90.1, 87.9, 72, 68.7, 63.6, 62.9, 59, 57.4),
+  likes_mill= c(2286.9, 10960.3, 2096.8, 5682.3, 437.3, 866.9, 3723.9, 268.8, 1057.7, 3202.8)
+)
 ```
 
 ## Exercise 3
+```{r exercise-3-setup, include=FALSE, message=FALSE, warning=FALSE}
+urlfile<- 'https://gitcdn.link/cdn/kaisamng/RGuides/main/resources/data/periodic-table-data.csv'
+periodic_table <- read_csv(url(urlfile))
+```
 
 Now, you will use the periodic_table data. It has already been loaded for you.
 
-```{r}
+```{r, attr.output='style="max-height: 100px; font-size:10px;"'}
 head(periodic_table)
 ```
 
@@ -231,9 +249,59 @@ na.omit(periodic_table[periodic_table$description %in% "Halogen" | periodic_tabl
 grade_code()
 ```
 
-```{r exercise-3-setup, include=FALSE, message=FALSE, warning=FALSE}
-urlfile<- 'https://github.com/kaisamng/RGuides/blob/main/resources/data/periodic-table-data.csv?raw=true'
-periodic_table <- read_csv(url(urlfile))
+# Exercise 4
+
+Let's turn our attention back to the `dca_weather` dataset. 
+
+```{r, echo=FALSE, attr.output='style="max-height: 100px; font-size:10px;"'}
+head(dca_weather)
+```
+
+```{r exercise-4-setup, include=FALSE, message=FALSE, warning=FALSE}
+urlfile<- 'https://gitcdn.link/cdn/kaisamng/RGuides/main/resources/data/dca_weather.csv'
+dca_weather <- read_csv(url(urlfile))
+```
+
+1. Take `PRCP`, which is precipitation in terms of inches of rain, and create a new column, `PRCP_mm`, which is precipitation in millimeters. The formula is: $\text{PRCP} * 25.4 = \text{PRCP_mm}$. 
+
+2. The `TAVG` column is the average temperature, in Fahrenheit. Create a new column called `TAVG_C` that takes `TAVG` and converts it to Celsius according to this formula: $ (\text{TAVG}  - 32) * (5/9) = \text{TAVG_C}$.
+
+3. Tabulate `SNOW`. Even though it's a quantitative variable, there are a lot of days where it didn't snow. How many days did the airport record snowfall? Store that number into the variable `snow_days`.
+
+```{r exercise-4, exercise=TRUE}
+#1
+
+
+#2
+
+
+#3
+
+
+```
+
+```{r exercise-4-solution}
+#1
+dca_weather$PRCP_mm <- dca_weather$PRCP * 25.4
+
+#2
+dca_weather$TAVG_Metric <- (dca_weather$TAVG -32) * (5/9)
+
+#3
+table(snow)
+snow_days <- 5
+```
+
+```{r exercise-4-hint}
+#1
+dca_weather$PRCP_mm <- ... * 25.4
+
+#2
+dca_weather$TAVG_Metric <- ...
+
+#3
+table()
+snow_days <- 5
 ```
 
 <div data-iframe-height></div>

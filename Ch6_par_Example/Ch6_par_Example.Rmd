@@ -38,3 +38,5 @@ boxplot(june_temps,
 urlfile<- 'https://github.com/kaisamng/RGuides/blob/main/resources/data/dca_weather.csv?raw=true'
 dca_weather <- read_csv(url(urlfile))
 ```
+
+<div data-iframe-height></div>

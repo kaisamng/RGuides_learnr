@@ -1,0 +1,86 @@
+---
+output: 
+  html_document:
+    includes:
+      in_header: iframe_resizer.html
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(gradethis)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+Store the sample space of a 8-sided die into `dice_8`. Then, run a simulation where you throw two 8-sided dice over 6 trials. Store the simulation results into `simul_two_dice8_6trials`. 
+
+```{r simul-ex, exercise=TRUE}
+dice_8 <-
+
+simul_two_dice8_6trials
+```
+
+<div id="simul-ex-hint>
+Did you create a sample space for `dice_8`?
+
+Have you used the `replicate()` and `sample()` function inside? 
+
+Did you remember to specify `replace= FALSE` inside `sample()`?
+</div>
+
+```{r simul-ex-solution, exercise=TRUE}
+dice_8 <- c(1:8)
+
+simul_two_dice8_6trials<- replicate(6, sample(dice_8, 2, replace=TRUE))
+
+```
+
+```{r simul-ex-code-check}
+grade_code()
+```
+Now, store the sample space for a coin flip. Define 1= Heads and 0= Tails. Flip 5 coins for 20 trials, and store the result in `simul_5coin_20trial`.
+
+Finally, we want to know how many of the 5 coins were `heads`. Since `1` represents `heads`, we can use `colSums()` in order to add up the total number of heads in each column. Store that result as number_heads_20_trials. 
+
+What was the average number of heads that you flipped, out of 20 trials? 
+
+``` {r simul-ex-2, exercise=TRUE}
+coin
+  
+simul_5coin_20trial
+  
+number_heads_20_trials 
+
+# Find the mean number of heads here:  
+
+```
+
+<div id="simul-ex-2-hint">
+coin <- c(...)
+  
+simul_5coin_20trial <- replicate(... , sample(... , ... , replace=TRUE))
+<
+number_heads_20_trials <- colSums(...)
+
+# Find the mean number of heads here:  
+mean(...)
+</div>
+
+
+```{r simul-ex-2-solution}
+coin<- c(0:1)
+
+simul_5coin_20trial <- replicate(20, sample(coin, 5, replace=TRUE))
+
+number_heads_20_trials <- colSums(simul_5coin_20trial)  
+
+number_heads_20_trials <-  
+# Find the mean number of heads here:   
+mean(number_heads_20_trials)
+```
+
+
+```{r simul-ex-2-code-check}
+grade_code()
+
+```

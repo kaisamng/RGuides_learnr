@@ -1,0 +1,30 @@
+---
+output: 
+  html_document:
+    includes:
+      in_header: iframe_resizer.html
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+```{r vectors-ex, exercise=TRUE}
+# Vector of type "Character"
+character <- "abc"
+
+# Vector of type "Numeric"
+numeric <- 12.5
+
+#Vector of type "Logical"
+logical<- TRUE
+
+str(character)
+str(numeric)
+str(logical)
+```
+
+

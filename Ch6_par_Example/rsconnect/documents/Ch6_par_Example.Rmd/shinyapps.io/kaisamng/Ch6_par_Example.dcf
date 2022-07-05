@@ -5,9 +5,9 @@ account: kaisamng
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 6557451
-bundleId: 6047473
+bundleId: 6047766
 url: https://kaisamng.shinyapps.io/Ch6_par_Example/
-when: 1656348622.24541
-lastSyncTime: 1656348622.24542
+when: 1656354720.26763
+lastSyncTime: 1656354720.26763
 asMultiple: FALSE
 asStatic: FALSE

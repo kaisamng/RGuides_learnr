@@ -1,0 +1,49 @@
+---
+output: 
+  html_document:
+    includes:
+      in_header: iframe_resizer.html
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(gradethis)
+knitr::opts_chunk$set(echo = FALSE)
+
+ng_b_scores <- data.frame("Ng_Scores"= c(81, 85, 71, 74, 76, 86, 79, 89, 87, 72),
+                          "B_Scores"= c(48, 46, 78, 59, 71, 63, 49, 56, 69, 68))
+```
+
+First, calculate the mean and standard deviation of each class. 
+```{r z-score-ex-1, exercise=TRUE}
+ng_b_scores$Ng_Scores
+
+ng_b_scores$B_Scores
+
+```
+
+```{r z-score-ex-1-solution}
+mean(ng_b_scores$Ng_Scores)
+mean(ng_b_scores$B_Scores)
+sd(ng_b_scores$Ng_Scores)
+sd(ng_b_scores$B_Scores)
+```
+
+Now, calculate the z-score of a person who stores an 80% in Mr. Ng's class, and then 80% in Mr. B's class. Store them into the variables below. 
+
+Do not use rounded approximations or actual numbers. Use the functions that you typed above. 
+```{r z-score-ex-2, exercise=TRUE}
+zscore_ng_80 
+
+zscore_b_80
+
+```
+
+```{r z-score-ex-2-solution}
+zscore_ng_80<- (80 - mean(ng_b_scores$Ng_Scores))/sd(ng_b_scores$Ng_Scores)
+zscore_ng_80
+
+zscore_b_80<- (80 - mean(ng_b_scores$B_Scores))/sd(ng_b_scores$B_Scores)
+zscore_b_80
+```

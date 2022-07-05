@@ -18,14 +18,18 @@ boxplot(month~PRCP, data=dca_weather)
 
 ```
 
-```{r boxplot-ex-hint}
+<div id="boxplot-ex-hint">
+**What should go in the blanks below?**
+
+```
 boxplot(y~x, data=dca_weather,
         col=c(),
         main="",
         xlab= "",
         ylab="",
         names=c())
-```
+```        
+</div>
 
 ```{r boxplot-ex-solution}
 boxplot(PRCP~month, data=dca_weather,
@@ -40,3 +44,5 @@ boxplot(PRCP~month, data=dca_weather,
 urlfile<- 'https://github.com/kaisamng/RGuides/blob/main/resources/data/dca_weather.csv?raw=true'
 dca_weather <- read_csv(url(urlfile))
 ```
+
+<div data-iframe-height></div>
