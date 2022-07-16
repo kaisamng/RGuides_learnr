@@ -1,0 +1,64 @@
+---
+output: 
+  html_document:
+    includes:
+      in_header: iframe_resizer.html
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(gradethis)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+The distribution of heights of adult American men is approximately Normal with mean 69 inches and standard deviation 2.5 inches. Draw a Normal curve on which this mean and standard deviation are correctly located. 
+
+```{r, out.width="60%"}
+x<- seq(from=60, to=75, by=0.01)
+y<- dnorm(x, mean= 69, sd=2.5)
+
+plot(x, y, type="l", main="Normal Distribution of American Men's Heights")
+```
+
+```{r quiz}
+quiz(
+  question("If I were to pick a random person within this distribution of the height of American men, what is the probability that I pick someone between 66.5 inches and 71.5 inches tall?",
+    answer("69%", correct=TRUE),
+    answer("95%"),
+    answer("99.7%")
+  ),
+  question("What percent of men are taller than 74 inches?",
+    answer("2.5%", correct = TRUE),
+    answer("5%"),
+    answer("16%"),
+    answer("32%")
+  ),
+  question("Between what heights do the middle 95% of men fall? Select BOTH lower and upper bounds.",
+           answer("64 inches", correct= TRUE),
+           answer("66.5 inches"),
+           answer("69 inches"),
+           answer("71.5 inches"),
+           answer("74 inches", correct= TRUE)),
+  question("What percent of men are between 64 and 66.5 inches tall?",
+           answer("6.5%"),
+           answer("13.5%", correct=TRUE),
+           answer("34%"),
+           answer("95%"),
+           answer("None of the above")),
+  question("A height of 71.5 inches corresponds to what percentile of adult male American heights?",
+           answer("50%"),
+           answer("68%"),
+           answer("84%", correct=TRUE),
+           answer("95%")),
+  question("What percentage of Americans are less than 70.25 inches in height?",
+           answer("34%"),
+           answer("50%"),
+           answer("68%"),
+           answer("69.1%", correct=TRUE),
+           answer("95%")
+))
+```
+
+

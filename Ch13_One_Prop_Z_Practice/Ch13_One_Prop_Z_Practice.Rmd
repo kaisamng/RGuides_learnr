@@ -1,0 +1,182 @@
+---
+output: 
+  html_document:
+    includes:
+      in_header: iframe_resizer.html
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(gradethis)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+1. Find the critical value for a 90% Confidence Interval for a Proportion.
+
+```{r ex-1, exercise=TRUE}
+
+
+```
+
+<div id="ex-1-hint">
+Should you be using `pnorm()` or `qnorm()`?
+
+Should the probability be greater than 0.5, or less than 0.5?
+</div>
+
+
+
+```{r ex-1-solution, exercise.reveal_solution=FALSE}
+# negative ----
+qnorm(0.1)
+
+# positive ----
+qnorm(0.9)
+```
+
+
+```{r ex-1-check}
+grade_this({
+  pass_if_equal(
+    .solution_all[["negative"]],
+    "That's right! This is the negative critical value, for the LEFT side."
+  )
+  pass_if_equal(
+    .solution_all[["positive"]],
+    "That's right! This is the positive critical value, for the RIGHT side."    
+  )
+  fail(hint=FALSE)
+})
+```
+
+2. You play a game and win 136 out of 270 times. Construct a 92% Confidence Interval for the probability of winning the game.
+
+First, calculate the critical value associated with a 92% Confidence Interval. Store this value as `zcrit_92`.
+
+```{r ex-2, exercise=TRUE}
+
+```
+
+```{r ex-2-check}
+grade_result(
+  pass_if(~identical(abs(.result), qnorm(0.96)))
+)
+```
+
+<div id="ex-2-hint">
+
+Remember: `zcrit_92` should not be 0.92. What area is outside the tails?
+
+
+</div>
+
+
+3. Find the sample proportion for your wins. Store that value as `phat`. 
+
+Then, find the standard error for the probability of you winning the game. Store this value as `se`. Use `phat` within your calculation.
+
+```{r ex-3, exercise=TRUE, exercise.setup="ex-2"}
+phat
+
+se
+  
+```
+
+
+```{r ex-3-solution}
+phat<- 136/270
+  
+se <-sqrt(phat*(1-phat)/270)
+
+
+```
+
+```{r ex-3-check}
+grade_result(
+  pass_if(~identical(.result, sqrt((136/270)*(1-(136/270))/270)))
+)
+```
+
+
+4. Find the lower bound for your 92% confidence interval. Use your values `phat`, `se`, and `zcrit_92`. Store this as `lower_bound`, amd then print it out by caling it.
+
+```{r ex-4-setup}
+phat<- 136/270
+se <-sqrt(phat*(1-phat)/270)
+zcrit_92 <- qnorm(0.96)
+```
+
+
+```{r ex-4, exercise=TRUE}
+
+
+
+
+lower_bound
+```
+
+```{r ex-4-check}
+grade_result(
+  pass_if(~identical(.result, (136/270) - (qnorm(0.96)* sqrt((136/270)*(1-(136/270))/270))))
+)
+```
+
+
+5. Find the upper bound for your 92% confidence interval. Use your values `phat`, `se`, and `zcrit_92`. Store this as `upper_bound`.
+
+```{r ex-5, exercise=TRUE, exercise.setup="ex-4-setup"}
+
+
+
+upper_bound
+```
+
+```{r ex-5-check}
+grade_result(
+  pass_if(~identical(.result, (136/270) + (qnorm(0.96)* sqrt((136/270)*(1-(136/270))/270))))
+)
+```
+
+
+
+6. A CBS/New York Times poll found that 329 out of 763 adults said they would travel to outer space in their lifetime, given the chance. Estimate the true proportion of adults who would like to travel to outer space with 98% confidence. 
+
+```{r ex-6, exercise=TRUE}
+
+
+
+
+```
+
+<div id="ex-6-hint">
+Remember that you need to first calculate $\hat{p}$, `se`, and the critical value.
+
+</div>
+
+
+```{r ex-6-solution}
+# upper bound ----
+(329/763) + (qnorm(0.99)* sqrt((329/763)*(1-(329/763))/763))
+
+
+# lower bound ----
+(329/763) - (qnorm(0.99)* sqrt((329/763)*(1-(329/763))/763))
+```
+
+
+
+
+```{r ex-6-check}
+grade_this({
+  pass_if_equal(
+    .solution_all[["upper bound"]],
+    "That's right! This is the upper bound solution."
+  )
+  pass_if_equal(
+    .solution_all[["lower bound"]],
+    "That's right! This is the lower bound solution."    
+  )
+  fail(hint=FALSE)
+})
+```

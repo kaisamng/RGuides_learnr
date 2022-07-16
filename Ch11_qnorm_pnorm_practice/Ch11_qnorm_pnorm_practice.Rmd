@@ -1,0 +1,162 @@
+---
+output: 
+  html_document:
+    includes:
+      in_header: iframe_resizer.html
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(gradethis)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+All questions refer to the Standard Normal Distribution, unless mentioned otherwise.
+
+1. Find the probability of $z < -1.43$.
+
+```{r pnorm-1, exercise=TRUE}
+
+
+```
+
+<div id="pnorm-1-hint">
+Should you be using `pnorm()` or `qnorm()`?
+
+Should the probability be greater than 0.5, or less than 0.5?
+</div>
+
+
+```{r pnorm-1-check}
+grade_result(
+  pass_if(~identical(.result, pnorm(-1.43)))
+)
+```
+
+
+
+2. Calculate $z> -1.7$
+
+
+```{r pnorm-2, exercise=TRUE}
+
+
+```
+
+<div id="pnorm-2-hint">
+What percentage represents the entire area under the curve?
+
+If `pnorm` gives you the area starting from the left, how do you find the area starting from the right?
+
+</div>
+
+
+```{r pnorm-2-check}
+grade_result(
+  pass_if(~identical(.result, 1-pnorm(-1.7)))
+)
+```
+
+3. Find the missing number in $P(z<\text{_____})= 0.2$ that would make this equation true.
+
+```{r qnorm-1, exercise=TRUE}
+
+
+```
+
+<div id="qnorm-1-hint">
+Are you given a z-score, or are you given a probability/area?
+
+Are you solving for a right-bound area, or a left-bound area?
+
+Should the z-score be negative, or positive?
+
+</div>
+
+
+```{r qnorm-1-check}
+grade_result(
+  pass_if(~identical(.result, qnorm(0.2)))
+)
+```
+
+
+
+
+
+4. Find the missing number in $P(z>\text{_____})= 0.7$ that would make this equation true.
+
+```{r qnorm-2, exercise=TRUE}
+
+
+```
+
+<div id="qnorm-2-hint">
+The probability here is greater than 50%. Does that mean $z$ should be left of center, or right of center?
+
+Should the z-score be negative, or positive?
+
+</div>
+
+```{r qnorm-2-check}
+grade_result(
+  pass_if(~identical(.result, qnorm(0.7)))
+)
+```
+
+
+
+5. Find the value of $z$ such that the positive and negative values of $z$ capture the middle 98% of the data.
+
+```{r qnorm-3, exercise=TRUE}
+
+
+```
+
+
+<div id="qnorm-3-hint">
+If 98% of the data is in the middle, what percentage is outside the tail?
+
+Are you focused on the area of one tail, or the area of two tails?
+
+</div>
+
+
+```{r qnorm-3-solution}
+# negative ----
+qnorm(0.01)
+
+# positive ----
+qnorm(0.99)
+```
+
+
+```{r qnorm-3-check}
+grade_this({
+  pass_if_equal(
+    .solution_all[["negative"]],
+    "That's right! This is the negative z-value for the LEFT side."
+  )
+  pass_if_equal(
+    .solution_all[["positive"]],
+    "That's right! This is the positive z-value for the RIGHT side."    
+  )
+  fail(hint=FALSE)
+})
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
