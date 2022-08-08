@@ -1,0 +1,32 @@
+---
+output: 
+  html_document:
+    includes:
+      in_header: iframe_resizer.html
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(ggplot2)
+library(gganimate)
+library(gapminder)
+library(gifski)
+library(scales)
+knitr::opts_chunk$set(echo = FALSE)
+options(scipen=100000)
+```
+
+
+```{r gganimate, exercise=TRUE}
+gapminder_plot_variant <- ggplot(gapminder, aes(x= gdpPercap,y= lifeExp,size=pop,color=continent)) +
+  geom_point(alpha=0.7)+ 
+  transition_time(year)+ 
+  labs(title="Life Expectancy vs GDP in Year {frame_time}") +
+  scale_x_log10(labels= comma)+ 
+  facet_wrap(~continent, scales="free")
+
+animate(gapminder_plot_variant, nframes= 20)
+```
+
+

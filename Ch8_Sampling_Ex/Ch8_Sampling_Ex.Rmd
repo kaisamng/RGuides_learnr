@@ -20,7 +20,7 @@ dice_8 <-
 simul_two_dice8_6trials
 ```
 
-<div id="simul-ex-hint>
+<div id="simul-ex-hint">
 Did you create a sample space for `dice_8`?
 
 Have you used the `replicate()` and `sample()` function inside? 
@@ -28,7 +28,7 @@ Have you used the `replicate()` and `sample()` function inside?
 Did you remember to specify `replace= FALSE` inside `sample()`?
 </div>
 
-```{r simul-ex-solution, exercise=TRUE}
+```{r simul-ex-solution}
 dice_8 <- c(1:8)
 
 simul_two_dice8_6trials<- replicate(6, sample(dice_8, 2, replace=TRUE))
@@ -59,10 +59,11 @@ number_heads_20_trials
 coin <- c(...)
   
 simul_5coin_20trial <- replicate(... , sample(... , ... , replace=TRUE))
-<
+
 number_heads_20_trials <- colSums(...)
 
-# Find the mean number of heads here:  
+**Find the mean number of heads here:  **
+
 mean(...)
 </div>
 

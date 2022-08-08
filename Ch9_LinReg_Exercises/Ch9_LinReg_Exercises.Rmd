@@ -1,0 +1,250 @@
+---
+output: 
+  html_document:
+    includes:
+      in_header: iframe_resizer.html
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(gradethis)
+library(BSDA)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+The following exercises will use the `Tv` dataset from the `BSDA` library. [Check out the documentation here.](https://www.rdocumentation.org/packages/BSDA/versions/1.2.1/topics/Tv)
+
+Here are the three variables (column names) in the `Tv` dataset.
+```{r colnames}
+colnames(Tv)
+
+```
+
+### Exercise 1
+
+```{r exp, echo=FALSE}
+question("What is the explanatory variable?",
+         answer("state"),
+         answer("percent", correct=TRUE),
+         answer("test"))
+```
+
+```{r response, echo=FALSE}
+question("What is the response variable?",
+         answer("state"),
+         answer("percent"),
+         answer("test", correct=TRUE))
+
+```
+
+
+### Exercise 2
+
+Create a scatter plot of `Tv` to investigate the relationship between the explanatory variable and response variable. For your title and axes labels, use the description of each variable from the data set (from `?Tv`) (so if you were using `percent`, it would be "percent of students who watch more than six hours of TV a day".)
+
+```{r plot, exercise=TRUE, exercise.lines=5}
+
+
+```
+
+
+<div id="plot-hint">
+Use `plot()`. Remember to specify your `xlab`, `ylab`, and `main`.
+</div>
+
+```{r plot-solution, echo=F}
+plot(test~percent, data=Tv,
+     main="Percent of students that watch more than 6 hours of TV per day versus national math test scores",
+     xlab="Percent of students who watch more than six hours of TV a day",
+     ylab="State average on National Math Test")
+
+```
+
+```{r plot-code-check, echo=F}
+grade_code()
+```
+
+
+### Exercise 3
+
+Create a linear regression model, store it as `reg_model`, and then print it out.
+
+```{r linreg, exercise=TRUE}
+
+
+```
+
+<div id="linreg-hint">
+You probably already used `linreg()`, but you also need to use `summary()`.
+
+Remember that `linreg()` requires you include your formula and data parameters.
+
+</div>
+
+```{r linreg-solution, echo=F}
+reg_model <- lm(test~percent, data=Tv)
+
+summary(reg_model)
+
+```
+
+```{r linreg-code-check, echo=F}
+grade_code()
+```
+
+```{r slope, echo=FALSE}
+question("What is the slope of this linear regression line?",
+         answer("287.0679"),
+         answer("2.6881"),
+         answer("106.79"),
+         answer("-1.8531", correct=T),
+         answer("0.1768"),
+         answer("-10.48"))
+```
+
+
+```{r int, echo=FALSE}
+question("What is the y-intercept of this linear regression line?",
+         answer("287.0679", correct=T),
+         answer("2.6881"),
+         answer("106.79"),
+         answer("-1.8531"),
+         answer("0.1768"),
+         answer("-10.48"))
+```
+
+
+```{r eq, echo=FALSE}
+question("What is the equation of this linear regression line?",
+         answer("$\\hat{y}=-1.8531 + 287.0679x$"),
+         answer("$\\hat{y}=1.8531x + 287.0679$"),
+         answer("$y=-1.8531\\hat{x} + 287.0679$"),
+         answer("$\\hat{y}=-1.8531x + 287.0679$", correct=T),
+         answer("$\\hat{y}=-1.8531 + 287.0679\\hat{x}$"))
+```
+
+
+
+### Exercise 4
+
+Using your code from Exercise 2, plot the scatterplot again, and then graph your linear regression from exercise 3 on top. **You will need to copy your code from Exercise 2** into the box below.
+
+Make sure your line is **red**.
+
+```{r lm, exercise=TRUE, exercise.setup="linreg-solution", exercise.lines=6}
+
+
+
+
+
+```
+
+
+
+<div id="lm-hint">
+Run the scatter plot command first. Then, run `abline()` separately using the linear model variable you got from exercise 3. 
+</div>
+
+```{r lm-solution}
+plot(test~percent, data=Tv,
+     main="Percent of students that watch more than 6 hours of TV per day versus national math test scores",
+     xlab="Percent of students who watch more than six hours of TV a day",
+     ylab="State average on National Math Test")
+abline(reg_model, col="red")
+```
+
+
+```{r lm-code-check, echo=F}
+grade_code()
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
