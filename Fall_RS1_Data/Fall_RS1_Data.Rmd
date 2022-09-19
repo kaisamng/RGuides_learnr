@@ -1,0 +1,126 @@
+---
+output: learnr::tutorial
+  # html_document:
+  #   includes:
+  #     in_header: iframe_resizer.html
+runtime: shiny_prerendered
+title: Analyzing RS1 Student Survey Data App
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+load("data/F22_RS1_SurveyData.RData")
+knitr::opts_chunk$set(echo = FALSE)
+options(scipen=100000)
+```
+
+## Selecting Data
+
+**Feel free to change any variables in here inside the code boxes, so you can analyze your data!**
+
+We've gone ahead and loaded the Survey Data for you in R. The data is stored in a variable called `Fall_2022_RS1_SurveyData`.
+
+Below is are the columns for the Survey data.
+
+```{r}
+names(Fall_2022_RS1_SurveyData)
+```
+
+-   **To select a column to make a graph, use the `$` operator.** So, for example, if you need to select **Hours Slept in the last 24 hours**, you would type `` Fall_2022_RS1_SurveyData$`Hours slept in last 24 hours` ``.
+
+-   Notice that R doesn't like column names with spaces. [To select the column, you need to surround the ENTIRE name with **backtick** marks. On your keyboard, the backtick mark is the key next to **1**. ]{style="background-color: #FFFF00"}
+
+-   [In other words, replace the quotation marks with backtick marks.]{style="background-color: #FFFF00"}
+
+```{r survey_data, exercise=TRUE}
+Fall_2022_RS1_SurveyData$`Hours slept in last 24 hours`
+```
+
+## Analyzing Categorical Data
+
+### Counting Categorical Data
+
+**Feel free to change any variables in here inside the code boxes, so you can analyze your data!**
+
+Again, below are the columns for the Survey data.
+
+```{r}
+names(Fall_2022_RS1_SurveyData)
+```
+
+`Teacher` is a categorical variable. This will give you a table with counts of each teacher.
+
+```{r teacher_table, exercise=TRUE}
+table(Fall_2022_RS1_SurveyData$`Teacher`)
+```
+
+To plot this categorical data, use the `plot` command. (Note that this is only possible because we imported all categorical data here as "factors", but you don't need know what this is, for now)
+
+```{r teacher_bar, exercise=TRUE}
+plot(Fall_2022_RS1_SurveyData$`Teacher`, 
+     main="Distribution of RS1 Students by Teacher",
+     xlab="Teacher", 
+     ylab="Number of Students", 
+     cex.names=0.9) 
+#The cex.names parameter shrinks the text size 
+#on the x-axis, which allows all teachers' names to be printed.
+#Here, we shrunk the text size to 90% of the original.
+```
+
+## Analyzing Quantitative Data
+
+Again, below are the columns for the Survey data.
+
+```{r}
+names(Fall_2022_RS1_SurveyData)
+```
+
+You can use `mean()`, `median()`, `fivenum()` to find each statistic for the data.
+
+```{r sum, exercise=TRUE}
+mean(Fall_2022_RS1_SurveyData$`Miles home is from TJ`)
+
+```
+
+### Making Dotplots
+
+**Feel free to change any variables in here inside the code boxes, so you can analyze your data!**
+
+To make a dotplot out of Quantitative Data, use the following code:
+
+```{r dotplot, exercise=TRUE}
+stripchart(Fall_2022_RS1_SurveyData$`Miles home is from TJ`, method = "stack", 
+           offset = 1, 
+           at = 0, 
+           pch = 19,
+           col = "steelblue", 
+           main = "Average Distance Students are from TJ", 
+           xlab = "Distance in Miles")
+
+```
+
+Someone put down 1800 miles. I hope they were talking about from their home country, because that's a lot of miles traveled every day!
+
+### Making Histograms
+
+Here's how to make a plot for the number of shoes each student wears
+
+```{r histogram, exercise=TRUE}
+hist(Fall_2022_RS1_SurveyData$`Shoes`, 
+     col= "skyblue", 
+     main= "Histogram of number of Shoes owned", 
+     xlab= "Number of Shoes", 
+     ylab="Number of TJ Students")
+```
+
+### Making Boxplots
+
+Finally, here's the same data, in a boxplot. Notice all the outliers!
+
+```{r boxplot, exercise=TRUE}
+boxplot(Fall_2022_RS1_SurveyData$`Shoes`, 
+     col= "skyblue", 
+     main= "Number of Shoes owned by TJ Students", 
+     xlab= "Number of Shoes", 
+     horizontal=T)
+```

@@ -1,0 +1,14 @@
+name: grade_calc
+title: grade_calc
+username:
+account: kaisamng
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 7045032
+bundleId: 6314367
+url: https://kaisamng.shinyapps.io/grade_calc/
+when: 1663531669.27669
+lastSyncTime: 1663531669.2767
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: www/.DS_Store

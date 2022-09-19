@@ -1,0 +1,14 @@
+name: Fall_RS1_Data
+title: Fall_RS1_Data
+username:
+account: kaisamng
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 6872476
+bundleId: 6251482
+url: https://kaisamng.shinyapps.io/Fall_RS1_Data/
+when: 1661861600.3015
+lastSyncTime: 1661861600.3015
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: data/.DS_Store
